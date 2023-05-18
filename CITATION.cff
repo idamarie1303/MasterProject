@@ -1,0 +1,13 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: MasterProject
+message: All the code from my master thesis
+type: software
+authors:
+  - given-names: Ida-Marie
+    family-names: Johansson
+    email: idamarie.fauske.johansson@gmail.com
+    name-particle: Ida-Marie
+repository-code: 'https://github.com/idamarie1303/MasterProject'
