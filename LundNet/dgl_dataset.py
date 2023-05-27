@@ -46,10 +46,7 @@ class DGLGraphDatasetLund(Dataset):
             self.label += [[label, l_pt, nr_l]]
             self.pt += [l_pt]
             self.nr += [nr_l]
-        #for jet in reader_sig:
-        #    self.data += [self._build_tree(JetTree(jet))]
-        #    self.label += [1]
-        print(len(self.label))
+
         print(' ... Total time to read input files + construct the graphs for {num} jets: {ts} seconds'.format(
             num=len(self.label), ts=time.process_time() - tic))
         if dump_number_of_nodes:

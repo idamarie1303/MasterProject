@@ -138,25 +138,30 @@ class Jets(Image):
 
     # ----------------------------------------------------------------------
     def process(self, event):
+        #Save label, pt and number of constituents for later
         label = event[0]["chi"]
         l_pt = event[0]["pt"]
         l_nr = event[0]["nr"]
-        #print(l_nr)
+
         constits = []
         if self.pseudojets or self.groomer:
             for p in event[1:]:
                 constits.append(fj.PseudoJet(p['px'], p['py'], p['pz'], p['E']))
             jets = self.jet_def(constits)
             if (len(jets)== 0):
+                # If no jets are clustered...
                 print(len(constits))
                 print(label)
                 print(l_nr)
                 
             if (len(jets) > 1):
+                #If more than one jet is created...
                 print("more than one jet")
                 
             if (len(jets[0].constituents())) != l_nr:
+                #If it doesnt get all the constituents from the dataset
                 print("oh")
+                
             if (len(jets) > 0):
                 if self.groomer:
                     constits = self.groomer(jets[0], self.pseudojets)

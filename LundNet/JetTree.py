@@ -24,19 +24,13 @@ class LundCoordinates:
         """Define a number of variables associated with the declustering."""
         delta = np.float32(max(1e-6, j1.delta_R(j2)))
         z = np.float32(j2.pt() / (j1.pt() + j2.pt()))
-        #print(j2.pt())
-        #print(j1.pt())
-        #print(j1.pt(), j2.pt(), delta, j2.m2())
-        #self.lnm = np.float32(0.5 * math.log(abs((j1 + j2).m2())))
+
+        self.lnm = np.float32(0.5 * math.log(abs((j1 + j2).m2())))
         self.lnKt = np.float32(math.log(j2.pt() * delta))
         self.lnz = np.float32(math.log(z))
         self.lnDelta = np.float32(math.log(delta))
         self.lnKappa = np.float32(math.log(z * delta))
-        dotprod = pseudojet.px()*j1.px() + pseudojet.py()*j1.py() + pseudojet.pz()*j1.pz()
-        l1 = np.sqrt(pow(pseudojet.px(),2)+pow(pseudojet.py(),2) + pow(pseudojet.pz(), 2))
-        l2 = np.sqrt(pow(j1.px(),2)+pow(j1.py(),2) + pow(j1.pz(),2))
-        #theta1 = np.arccos(dotprod/(l1*l2))
-        #self.theta1 = np.float32(theta1)
+
         try:
             self.psi = np.float32(math.atan((j1.rap() - j2.rap()) / (j1.phi() - j2.phi())))
         except ZeroDivisionError:
@@ -44,7 +38,7 @@ class LundCoordinates:
 
     # ----------------------------------------------------------------------
     @staticmethod
-    def change_dimension(n, order=['lnz', 'lnDelta', 'psi', 'lnm', 'lnKt']):#, 'theta1']):
+    def change_dimension(n, order=['lnz', 'lnDelta', 'psi', 'lnm', 'lnKt']):
         LundCoordinates.components = order[:n]
         print(LundCoordinates.components)
         LundCoordinates.dimension = len(LundCoordinates.components)
